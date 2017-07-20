@@ -101,9 +101,9 @@ TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
 
 
 if [[ "$libc" == "musl" ]]; then
-  LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
+  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
 else
-  LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
+  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
 fi
 echo $LD64SO
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
