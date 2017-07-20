@@ -2,6 +2,7 @@
 cc=
 libc=
 ccver=
+status=0
 
 error_in () {
   echo "Correct libC and Compiler inputs not passed to make.sh"
@@ -11,7 +12,7 @@ error_in () {
 
 help () {
   echo "make.sh compiles EPCC's OpenMP microbenchmark using various toolchains"
-  echo "Usage: ./make.sh C_LIB CC CC_VER"
+  echo "Usage: specify a compiler, version and a libc. make.sh does the rest."
   exit
 }
 
@@ -66,13 +67,20 @@ rdy () {
 read ready
 if [ "$ready" == "y" ] || [ -z "$ready" ]
  then
-  echo "here we would compile"
+  echo "Begin compilation!"
+  status=1 #track status across the compile process
 elif [ "$ready" == "n" ]
  then
-  echo "we would not compile"
+  echo "Compilation cancelled."
+  exit
 else
-  echo "malformed input. please use y/n"
+  echo "Malformed input. Please use y/n."
   rdy
 fi
 }
 rdy
+
+if [ "$status" =! 1 ]
+ then
+  exit
+fi
