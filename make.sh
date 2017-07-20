@@ -63,7 +63,13 @@ if [ "$cc" == "gcc" ]
   exit
 fi
 
-getinput benchpath benchpathread '$BENCHPATHVAR'
+echo "Please input path of benchmark or use [$BENCHPATHVAR]:"
+read benchpathread
+if [[ -z "$benchpathread" ]]; then
+  export benchpath=$BENCHPATHVAR
+elif [[ ! -z "$benchpathread" ]]; then
+  export benchpath=$benchpathread
+fi
 
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
