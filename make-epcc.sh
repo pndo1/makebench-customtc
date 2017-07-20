@@ -39,12 +39,14 @@ if [ "$help" == "help" ] || [ -z $1 ]
    help
 fi
 
-libc=$(grep -Eow 'musl|glibc|uclibc' <<< "$*")
+libc=$(grep -Eow 'musl|glibc|uclibc|gnu' <<< "$*")
 cc=$(grep -Eow 'gcc|clang' <<< "$*")
 
 if [ -z "$libc" ] || [ -z "$cc" ]
  then
   error_in
+elif [[ "$libc" == "glibc" ]]; then
+  libc=gnu
 fi
 
 if [ "$cc" == "gcc" ]
@@ -95,7 +97,12 @@ if [ -e "Makefile.defs" ]
 
 TOOLCHAIN=x86_64-unknown-linux-$libc
 TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
+
+if [[ "$libc" == "musl" ]]; then
+  LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so*
+else
 LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so
+fi
 echo $LD64SO
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile.defs
