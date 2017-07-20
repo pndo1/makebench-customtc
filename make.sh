@@ -15,17 +15,6 @@ help () {
   exit
 }
 
-if [ -z $1 ] 
- then
-  help
-fi
-
-help=$(grep -o help <<< $*)
-if [ "$help" == "help" ]
- then
-   help
-fi
-
 getinput () { #$1 - variable to set, $2 variable to read, $3 variable default $4 option2
 input=$2
 default=$3
@@ -42,6 +31,17 @@ read input
         getinput $1 $input $default $option2
       fi
 }
+
+if [ -z $1 ]
+ then
+  help
+fi
+
+help=$(grep -o help <<< $*)
+if [ "$help" == "help" ]
+ then
+   help
+fi
 
 libc=$(grep -Eow 'musl|glibc|uclibc' <<< "$*")
 cc=$(grep -Eow 'gcc|clang' <<< "$*")
@@ -88,6 +88,6 @@ elif [ "$ready" == "n" ]
 else
   echo "malformed input. please use y/n"
   rdy
-fi 
+fi
 }
 rdy
