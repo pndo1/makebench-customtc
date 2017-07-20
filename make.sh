@@ -28,7 +28,7 @@ read input
        then
         export $1=$option2
       else
-        echo "input malformed. please input correct gcc version -- 7.1.0 or [6.4.0]"
+        echo "input malformed. please input correct parameter -- $option2 [$default]"
         getinput $1 $input $default $option2
       fi
 }
@@ -64,9 +64,7 @@ if [ "$cc" == "gcc" ]
   exit
 fi
 
-echo "What is the full path to the $bench source location?"
-read benchpath
-export benchpath
+getinput benchpath benchpathread '$BENCHPATHVAR'
 
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
