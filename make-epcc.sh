@@ -80,7 +80,7 @@ fi
 }
 rdy
 
-if [ "$status" =! "1" ] #check that explicit directive to compile has been given
+if [ $status =! 1 ] #check that explicit directive to compile has been given
  then
   exit
 fi
@@ -92,6 +92,7 @@ if [ -e "Makefile.defs" ]
  else
    touch Makefile.defs
  fi
+
 TOOLCHAIN=x86_64-unknown-linux-$libc
 TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
