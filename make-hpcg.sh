@@ -127,6 +127,8 @@ echo -e "ARCHIVER     = ar\nARFLAGS      = r\nRANLIB       = echo" >> Makefile.$
 
 echo "Makefile.$cc-$libc has been configured"
 echo "Begin compilation!"
-./compile $cc-$libc
+mkdir build-$cc-$libc
+cd build-$cc-$libc
+../compile $cc-$libc
 make
 status=2
