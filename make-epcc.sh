@@ -11,7 +11,7 @@ error_in () {
 }
 
 help () {
-  echo "make.sh compiles EPCC's OpenMP microbenchmark using various toolchains"
+  echo "make-epcc.sh compiles EPCC's OpenMP microbenchmark using various toolchains"
   echo "Usage: specify a compiler, version and a libc. make.sh does the rest."
   exit
 }
@@ -67,7 +67,7 @@ rdy () {
 read ready
 if [ "$ready" == "y" ] || [ -z "$ready" ]
  then
-  echo "Begin compilation!"
+  echo "Begin configuration!"
   status=1 #track status across the compile process
 elif [ "$ready" == "n" ]
  then
@@ -80,7 +80,30 @@ fi
 }
 rdy
 
-if [ "$status" =! 1 ]
+if [ "$status" =! 1 ] #check that explicit directive to compile has been given
  then
   exit
 fi
+
+if [ -e "Makefile.defs" ]
+ then
+   mv Makefile.defs Makefile.defs.$(date -I).$(date +%k%M)
+   touch Makefile.defs
+ else
+   touch Makefile.defs
+ fi
+
+echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
+echo "TOOLCHAIN=x86_64-unknown-linux-$libc" >> Makefile.defs
+echo "TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$(TOOLCHAIN)" >> Makefile.defs
+echo "LD64SO := $(wildcard $(TOOLDIR)/$(TOOLCHAIN)/sysroot/lib64/ld*so)" >> Makefile.defs
+echo "CC=$(TOOLDIR)/bin/$(TOOLCHAIN)-gcc" >> Makefile.defs
+echo "LD=$(TOOLDIR)/bin/$(TOOLCHAIN)-ld" >> Makefile.defs
+echo "CFLAGS =  -O1 -lm" >> Makefile.defs
+echo "LDFLAGS = -O0 -lm -lgomp -W1,--dynamic-linker=$(LD64SO)" >> Makefile.defs
+echo "CPP = $(TOOLDIR)/bin/$(TOOLCHAIN)-cpp" >> Makefile.defs
+echo "LIBS =" >> Makefile.defs
+
+echo "Makefile.defs has been configured"
+echo "Begin compilation!"
+status=2
