@@ -19,7 +19,6 @@ help () {
 getinput () { #$1 - variable to set, $2 variable to read, $3 variable default $4 option2
 input=$2
 default=$3
-option2=$4
 read input
       if [ -z "$input" ] || [ "$input" == "$3" ]
        then
@@ -28,7 +27,7 @@ read input
        then
         export $1=$option2
       else
-        echo "input malformed. please input correct parameter -- $option2 [$default]"
+        echo "input malformed. please input correct parameter -- $4 [$default]"
         getinput $1 $input $default $option2
       fi
 }
