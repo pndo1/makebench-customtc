@@ -66,6 +66,7 @@ fi
 
 echo "What is the full path to the $bench source location?"
 read benchpath
+export benchpath
 
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
