@@ -32,13 +32,8 @@ read input
       fi
 }
 
-if [ -z $1 ]
- then
-  help
-fi
-
 help=$(grep -o help <<< $*)
-if [ "$help" == "help" ]
+if [ "$help" == "help" ] || [ -z $1 ]
  then
    help
 fi
@@ -57,16 +52,6 @@ if [ "$cc" == "gcc" ]
    if [ -z "$ccver" ]
     then
      echo "gcc version not specified or malformed, please input gcc version [6.4.0]"
-#     read defaultgcc
-#      if [ -z "$defaultgcc" ] || [ "$defaultgcc" == "6.4.0" ]
-#       then
-#        ccver=6.4.0
-#      elif [ "$defaultgcc" == "7.1.0" ]
-#       then
-#        ccver=7.1.0
-#      else
-#        error_in
-#      fi
     getinput ccver defaultgcc 6.4.0 7.1.0
    fi
  elif [ "$cc" == "clang" ]
