@@ -106,12 +106,12 @@ else
   LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
 fi
 echo $LD64SO
-echo -e "SHELL        = /bin/sh\nCD           = cd\n\nCP           = cp\nLN_S         = ln -s -f\nMKDIR        = mkdir -p\nRM           = /bin/rm -f\nTOUCH        = touch" >> Makefile.$cc-$libc
-echo -e "TOPdir       = .\nSRCdir       = $(TOPdir)/src\nINCdir       = $(TOPdir)/src\nBINdir       = $(TOPdir)/bin" >> Makefile.$cc-$libc
-echo -e "MPdir        =\nMPinc        =\nMPlib        =" >> Makefile.$cc-$libc
-echo -e "HPCG_INCLUDES = -I$(INCdir) -I$(INCdir)/$(arch) $(MPinc)\nHPCG_LIBS     =" >> Makefile.$cc-$libc
-echo -e "HPCG_OPTS     = -DHPCG_NO_MPI" >> Makefile.$cc-$libc
-echo -e "HPCG_DEFS     = $(HPCG_OPTS) $(HPCG_INCLUDES)" >> Makefile.$cc-$libc
+echo -e 'SHELL        = /bin/sh\nCD           = cd\n\nCP           = cp\nLN_S         = ln -s -f\nMKDIR        = mkdir -p\nRM           = /bin/rm -f\nTOUCH        = touch' >> Makefile.$cc-$libc
+echo -e 'TOPdir       = .\nSRCdir       = $(TOPdir)/src\nINCdir       = $(TOPdir)/src\nBINdir       = $(TOPdir)/bin' >> Makefile.$cc-$libc
+echo -e 'MPdir        =\nMPinc        =\nMPlib        =' >> Makefile.$cc-$libc
+echo -e 'HPCG_INCLUDES = -I$(INCdir) -I$(INCdir)/$(arch) $(MPinc)\nHPCG_LIBS     =' >> Makefile.$cc-$libc
+echo -e 'HPCG_OPTS     = -DHPCG_NO_MPI' >> Makefile.$cc-$libc
+echo -e 'HPCG_DEFS     = $(HPCG_OPTS) $(HPCG_INCLUDES)' >> Makefile.$cc-$libc
 
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile.$cc-$libc
 echo "TOOLDIR=$TOOLDIR" >> Makefile.$cc-$libc
@@ -119,8 +119,8 @@ echo "LD64SO=$LD64SO" >> Makefile.$cc-$libc
 echo "CC=$TOOLDIR/bin/$TOOLCHAIN-$cc" >> Makefile.$cc-$libc
 echo "CXX=$TOOLDIR/bin/$TOOLCHAIN-g++" >> Makefile.$cc-$libc
 echo "LINKER=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Makefile.$cc-$libc
-echo 'CXXFLAGS =  $(HPCG_DEFS) -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm' >> Makefile.$cc-$libc
-echo "LINKFLAGS = $(HPCG_DEFS) -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm -lgomp -Wl,--dynamic-linker=$LD64SO" >> Makefile.$cc-$libc
+echo 'CXXFLAGS =  '$(HPCG_DEFS)' -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm' >> Makefile.$cc-$libc
+echo "LINKFLAGS = '$(HPCG_DEFS)' -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm -lgomp -Wl,--dynamic-linker=$LD64SO" >> Makefile.$cc-$libc
 echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> Makefile.$cc-$libc
 echo 'LIBS =' >> Makefile.$cc-$libc
 echo -e "ARCHIVER     = ar\nARFLAGS      = r\nRANLIB       = echo" >> Makefile.$cc-$libc
@@ -129,6 +129,6 @@ echo "Makefile.$cc-$libc has been configured"
 echo "Begin compilation!"
 mkdir build-$cc-$libc
 cd build-$cc-$libc
-../compile $cc-$libc
+../configure $cc-$libc
 make
 status=2
