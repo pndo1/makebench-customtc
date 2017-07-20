@@ -80,7 +80,7 @@ fi
 }
 rdy
 
-if [ $status =! 1 ] #check that explicit directive to compile has been given
+if [ $status != 1 ] #check that explicit directive to compile has been given
  then
   exit
 fi
