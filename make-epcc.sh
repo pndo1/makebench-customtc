@@ -95,17 +95,19 @@ if [ -e "Makefile.defs" ]
 
 TOOLCHAIN=x86_64-unknown-linux-$libc
 TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
+LD64SO = $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile.defs
 echo "TOOLDIR=$TOOLDIR" >> Makefile.defs
-echo 'LD64SO := $(wildcard $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so)' >> Makefile.defs
+echo "LD64SO=$LD64SO" >> Makefile.defs
 echo "CC=$TOOLDIR/bin/$TOOLCHAIN-gcc" >> Makefile.defs
 echo "LD=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Makefile.defs
 echo 'CFLAGS =  -O1 -lm' >> Makefile.defs
-echo 'LDFLAGS = -O0 -lm -lgomp -W1,--dynamic-linker=$LD64SO' >> Makefile.defs
+echo "LDFLAGS = -O0 -lm -lgomp -W1,--dynamic-linker=$LD64SO" >> Makefile.defs
 echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> Makefile.defs
 echo 'LIBS =' >> Makefile.defs
 
 echo "Makefile.defs has been configured"
 echo "Begin compilation!"
+make
 status=2
