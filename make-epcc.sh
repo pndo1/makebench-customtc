@@ -95,7 +95,8 @@ if [ -e "Makefile.defs" ]
 
 TOOLCHAIN=x86_64-unknown-linux-$libc
 TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
-LD64SO = $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so
+LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ld*so
+echo $LD64SO
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile.defs
 echo "TOOLDIR=$TOOLDIR" >> Makefile.defs
