@@ -1,5 +1,5 @@
 #!/bin/bash
-
+cd $benchpath
 cd setup
 
 if [ -e "Make.$cc$ccver-$libc" ]

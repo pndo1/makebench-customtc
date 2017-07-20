@@ -33,26 +33,26 @@ read input
       fi
 }
 
-help=$(grep -o help <<< $*)
+export help=$(grep -o help <<< $*)
 if [ "$help" == "help" ] || [ -z $1 ]
  then
    help
 fi
 
-libc=$(grep -Eowi 'musl|glibc|uclibc|gnu' <<< "$*")
-cc=$(grep -Eowi 'gcc|clang' <<< "$*")
-bench=$(grep -Eowi 'epcc|hpcg|minife' <<< "$*")
+export libc=$(grep -Eowi 'musl|glibc|uclibc|gnu' <<< "$*")
+export cc=$(grep -Eowi 'gcc|clang' <<< "$*")
+export bench=$(grep -Eowi 'epcc|hpcg|minife' <<< "$*")
 
-if [ -z "$libc" ] || [ -z "$cc" ] | [ -z "$bench"]
+if [ -z "$libc" ] || [ -z "$cc" ] | [ -z "$bench" ]
  then
   error_in
 elif [[ "$libc" == "glibc" ]]; then
-  libc=gnu
+  export libc=gnu
 fi
 
 if [ "$cc" == "gcc" ]
  then
-  ccver=$(grep -Eow '6.4.0|7.1.0' <<< "$*")
+  export ccver=$(grep -Eow '6.4.0|7.1.0' <<< "$*")
    if [ -z "$ccver" ]
     then
      echo "gcc version not specified or malformed, please input gcc version [6.4.0]"
@@ -64,14 +64,18 @@ if [ "$cc" == "gcc" ]
   exit
 fi
 
+echo "What is the full path to the $bench source location?"
+read benchpath
+
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
+echo "$bench source located at $benchpath"
 rdy () {
 read ready
 if [ "$ready" == "y" ] || [ -z "$ready" ]
  then
   echo "Begin configuration!"
-  status=1 #track status across the compile process
+  export status=1 #track status across the compile process
 elif [ "$ready" == "n" ]
  then
   echo "Compilation cancelled."
@@ -88,13 +92,13 @@ if [ $status != 1 ] #check that explicit directive to compile has been given
   exit
 fi
 
-TOOLCHAIN=x86_64-unknown-linux-$libc
-TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
+export TOOLCHAIN=x86_64-unknown-linux-$libc
+export TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
 
 if [[ "$libc" == "musl" ]]; then
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
+  export LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
 else
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
+  export LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
 fi
 
 if [[ "$bench" == "minife" ]]; then
