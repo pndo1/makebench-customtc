@@ -2,24 +2,24 @@
 cd $benchpath
 
 if [[ ! -d build-miniFE-$cc$ccver-$libc ]]; then
-  benchfile=$(ls $benchpath/*.tar | grep -i minife)
+  benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
   mkdir build-miniFE-$cc$ccver-$libc
   tar -xf $benchfile -C build-miniFE-$cc$ccver-$libc
-  cd build-miniFE-$cc$ccver-$libc/source
+  cd build-miniFE-$cc$ccver-$libc/src
 else
   rm -r build-miniFE-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
   mkdir build-miniFE-$cc$ccver-$libc
   tar -xf $benchfile -C build-miniFE-$cc$ccver-$libc
-  cd build-miniFE-$cc$ccver-$libc/source
+  cd build-miniFE-$cc$ccver-$libc/src
 fi
 
-if [ -e "makefile-$cc$ccver-$libc" ]
+if [ -e "Makefile-$cc$ccver-$libc" ]
  then
-   mv makefile-$cc$ccver-$libc makefile-$cc$ccver-$libc.$(date -I).$(date +%k%M)
-   touch makefile-$cc$ccver-$libc
+   mv Makefile-$cc$ccver-$libc Makefile-$cc$ccver-$libc.$(date -I).$(date +%k%M)
+   touch Makefile-$cc$ccver-$libc
  else
-   touch makefile-$cc$ccver-$libc
+   touch Makefile-$cc$ccver-$libc
  fi
 
 if [[ "$libc" == "musl" ]]; then
@@ -28,26 +28,26 @@ else
   LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
 fi
 echo $LD64SO
-echo -e 'MINIFE_TYPES =  \' >> makefile-$cc$ccver-$libc
-echo -e '        -DMINIFE_SCALAR=double   \' >> makefile-$cc$ccver-$libc
-echo -e '        -DMINIFE_LOCAL_ORDINAL=int      \' >> makefile-$cc$ccver-$libc
-echo -e '        -DMINIFE_GLOBAL_ORDINAL="long long int"' >> makefile-$cc$ccver-$libc
-echo -e '' >> makefile-$cc$ccver-$libc
-echo -e 'MINIFE_MATRIX_TYPE = -DMINIFE_CSR_MATRIX' >> makefile-$cc$ccver-$libc
-echo 'CFLAGS = -O3 -fopenmp -lm' >> makefile-$cc$ccver-$libc
-echo 'CXXFLAGS = -O3 -fopenmp -lm' >> makefile-$cc$ccver-$libc
-echo 'CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE)' >> makefile-$cc$ccver-$libc
-echo "LDFLAGS = -lm -lgomp -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64/" >> makefile-$cc$ccver-$libc
-echo "TOOLCHAIN=$TOOLCHAIN" >> makefile-$cc$ccver-$libc
-echo "TOOLDIR=$TOOLDIR" >> makefile-$cc$ccver-$libc
-echo "LD64SO=$LD64SO" >> makefile-$cc$ccver-$libc
-echo "CC=$TOOLDIR/bin/$TOOLCHAIN-$cc" >> makefile-$cc$ccver-$libc
-echo "LD=$TOOLDIR/bin/$TOOLCHAIN-ld" >> makefile-$cc$ccver-$libc
-echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> makefile-$cc$ccver-$libc
-echo "CXX=$TOOLDIR/bin/$TOOLCHAIN-g++" >> makefile-$cc$ccver-$libc
-echo 'LIBS =' >> makefile-$cc$ccver-$libc
-echo "include make_targets" >> makefile-$cc$ccver-$libc
-echo "makefile-$cc$ccver-$libc has been configured"
+echo -e 'MINIFE_TYPES =  \' >> Makefile-$cc$ccver-$libc
+echo -e '        -DMINIFE_SCALAR=double   \' >> Makefile-$cc$ccver-$libc
+echo -e '        -DMINIFE_LOCAL_ORDINAL=int      \' >> Makefile-$cc$ccver-$libc
+echo -e '        -DMINIFE_GLOBAL_ORDINAL="long long int"' >> Makefile-$cc$ccver-$libc
+echo -e '' >> Makefile-$cc$ccver-$libc
+echo -e 'MINIFE_MATRIX_TYPE = -DMINIFE_CSR_MATRIX' >> Makefile-$cc$ccver-$libc
+echo 'CFLAGS = -O3 -fopenmp -lm' >> Makefile-$cc$ccver-$libc
+echo 'CXXFLAGS = -O3 -fopenmp -lm' >> Makefile-$cc$ccver-$libc
+echo 'CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE)' >> Makefile-$cc$ccver-$libc
+echo "LDFLAGS = -lm -lgomp -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64/" >> Makefile-$cc$ccver-$libc
+echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile-$cc$ccver-$libc
+echo "TOOLDIR=$TOOLDIR" >> Makefile-$cc$ccver-$libc
+echo "LD64SO=$LD64SO" >> Makefile-$cc$ccver-$libc
+echo "CC=$TOOLDIR/bin/$TOOLCHAIN-$cc" >> Makefile-$cc$ccver-$libc
+echo "LD=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Makefile-$cc$ccver-$libc
+echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> Makefile-$cc$ccver-$libc
+echo "CXX=$TOOLDIR/bin/$TOOLCHAIN-g++" >> Makefile-$cc$ccver-$libc
+echo 'LIBS =' >> Makefile-$cc$ccver-$libc
+echo "include make_targets" >> Makefile-$cc$ccver-$libc
+echo "Makefile-$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
-make -f makefile-$cc$ccver-$libc
+make -f Makefile-$cc$ccver-$libc
 status=2

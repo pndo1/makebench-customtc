@@ -71,7 +71,7 @@ elif [[ "$bench" == "epcc" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$EPCCPATH
 elif [[ "$bench" == "minife" ]]; then
-  benchsrctype=.tar
+  benchsrctype=tar.gz
   BENCHPATHVAR=$MINIFEPATH
 fi
 
