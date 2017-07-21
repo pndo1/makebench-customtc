@@ -63,7 +63,16 @@ if [ "$cc" == "gcc" ]
   exit
 fi
 
-echo "Please input path of benchmark or use [$BENCHPATHVAR]:"
+if [[ "$bench" == "hpcg" ]]; then
+  benchsrctype=source
+  BENCHPATHVAR=HPCGPATH
+
+else
+  benchsrctype=tar
+  BENCHPATHVAR=EPCCPATH
+fi
+
+echo "Please input $benchsrctype location of $bench or use variable [$BENCHPATHVAR]:"
 read benchpathread
 if [[ -z "$benchpathread" ]]; then
   export benchpath=$BENCHPATHVAR
