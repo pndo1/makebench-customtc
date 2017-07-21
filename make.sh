@@ -72,7 +72,7 @@ else
   BENCHPATHVAR=EPCCPATH
 fi
 
-echo "Please input $benchsrctype location of $bench or use variable [$BENCHPATHVAR]:"
+echo "Please input folder of $benchsrctype of $bench or use variable [$BENCHPATHVAR]:"
 read benchpathread
 if [[ -z "$benchpathread" ]]; then
   export benchpath=$BENCHPATHVAR
