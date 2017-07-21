@@ -34,8 +34,8 @@ echo -e '        -DMINIFE_LOCAL_ORDINAL=int      \' >> makefile-$cc$ccver-$libc
 echo -e '        -DMINIFE_GLOBAL_ORDINAL="long long int"' >> makefile-$cc$ccver-$libc
 echo -e '' >> makefile-$cc$ccver-$libc
 echo -e 'MINIFE_MATRIX_TYPE = -DMINIFE_CSR_MATRIX' >> makefile-$cc$ccver-$libc
-echo 'CFLAGS = -O3 -mp -lm' >> makefile-$cc$ccver-$libc
-echo 'CXXFLAGS = -O3 -mp -lm' >> makefile-$cc$ccver-$libc
+echo 'CFLAGS = -O3 -fopenmp -lm' >> makefile-$cc$ccver-$libc
+echo 'CXXFLAGS = -O3 -fopenmp -lm' >> makefile-$cc$ccver-$libc
 echo 'CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE)' >> makefile-$cc$ccver-$libc
 echo "LDFLAGS = -lm -lgomp -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64/" >> makefile-$cc$ccver-$libc
 echo "TOOLCHAIN=$TOOLCHAIN" >> makefile-$cc$ccver-$libc
