@@ -31,8 +31,8 @@ echo "TOOLDIR=$TOOLDIR" >> Makefile.defs
 echo "LD64SO=$LD64SO" >> Makefile.defs
 echo "CC=$TOOLDIR/bin/$TOOLCHAIN-$cc" >> Makefile.defs
 echo "LD=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Makefile.defs
-echo "CFLAGS =  -O1 -lm -L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/" >> Makefile.defs
-echo "LDFLAGS = -O0 -lm -lgomp -L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64" >> Makefile.defs
+echo "CFLAGS =  -O1 -lm -L$toollibs/" >> Makefile.defs
+echo "LDFLAGS = -O0 -lm -lgomp -L$toollibs/ -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64" >> Makefile.defs
 echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> Makefile.defs
 echo 'LIBS =' >> Makefile.defs
 

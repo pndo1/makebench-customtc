@@ -34,7 +34,7 @@ echo -e 'MINIFE_MATRIX_TYPE = -DMINIFE_CSR_MATRIX' >> Makefile-$cc$ccver-$libc
 echo 'CFLAGS = -O3 -fopenmp -lm '-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ >> Makefile-$cc$ccver-$libc
 echo 'CXXFLAGS = -O3 -fopenmp -lm '-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ >> Makefile-$cc$ccver-$libc
 echo 'CPPFLAGS = -I. -I../utils -I../fem $(MINIFE_TYPES) $(MINIFE_MATRIX_TYPE)' >> Makefile-$cc$ccver-$libc
-echo "LDFLAGS = -lm -lgomp -L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64" >> Makefile-$cc$ccver-$libc
+echo "LDFLAGS = -lm -lgomp -L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64" >> Makefile-$cc$ccver-$libc
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile-$cc$ccver-$libc
 echo "TOOLDIR=$TOOLDIR" >> Makefile-$cc$ccver-$libc
 echo "LD64SO=$LD64SO" >> Makefile-$cc$ccver-$libc
