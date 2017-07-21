@@ -67,9 +67,12 @@ if [[ "$bench" == "hpcg" ]]; then
   benchsrctype=source
   BENCHPATHVAR=$HPCGPATH
 
-else
+elif [[ "$bench" == "epcc" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$EPCCPATH
+elif [[ "$bench" == "minife" ]]; then
+  benchsrctype=MiniFE
+  BENCHPATHVAR=$MINIFEPATH
 fi
 
 echo "Please input folder of $benchsrctype of $bench or use variable [$BENCHPATHVAR]:"
