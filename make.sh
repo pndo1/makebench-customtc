@@ -65,11 +65,11 @@ fi
 
 if [[ "$bench" == "hpcg" ]]; then
   benchsrctype=source
-  BENCHPATHVAR=HPCGPATH
+  BENCHPATHVAR=$HPCGPATH
 
 else
-  benchsrctype=tar
-  BENCHPATHVAR=EPCCPATH
+  benchsrctype=tar.gz
+  BENCHPATHVAR=$EPCCPATH
 fi
 
 echo "Please input folder of $benchsrctype of $bench or use variable [$BENCHPATHVAR]:"
