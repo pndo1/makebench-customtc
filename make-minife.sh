@@ -3,14 +3,16 @@ cd $benchpath
 
 if [[ ! -d build-miniFE-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
-  mkdir build-miniFE-$cc$ccver-$libc
   tar -xf $benchfile
+  benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
+  mv $benchfolder build-miniFE-$cc$ccver-$libc
   cd build-miniFE-$cc$ccver-$libc/src
 else
   rm -r build-miniFE-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
-  mkdir build-miniFE-$cc$ccver-$libc
   tar -xf $benchfile
+  benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
+  mv $benchfolder build-miniFE-$cc$ccver-$libc
   cd build-miniFE-$cc$ccver-$libc/src
 fi
 
