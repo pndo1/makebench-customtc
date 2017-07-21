@@ -1,4 +1,6 @@
 # makesh-customxtc
-Scripts for setting variables when using multiple toolchains
+Scripts making several benchmarks using various toolchains.
 
 Generally for use with toolchains compiled using Crosstool-NG, but directories are hardcoded for use on ANL's JLSE hardware testbed.
+
+Options are mostly hardcoded.
