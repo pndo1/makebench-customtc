@@ -13,6 +13,8 @@ error_in () {
 help () {
   echo "make-hpcg.sh compiles the HPCG benchmark using various toolchains"
   echo "Usage: specify a compiler, version and a libc. make.sh does the rest."
+  echo 'Syntax: ^ specifies libc {glibc (gnu), musl, uClibc}, % specifies compiler {gcc,clang}'
+  echo 'gcc version syntax: %gcc@version {6.4.0, 7.1.0}'
   exit
 }
 
@@ -38,8 +40,8 @@ if [ "$help" == "help" ] || [ -z $1 ]
    help
 fi
 
-export libc=$(grep -Eowi 'musl|glibc|uclibc|gnu' <<< "$*")
-export cc=$(grep -Eowi 'gcc|clang' <<< "$*")
+export libc=$(grep -o '[^ ]*\^[^ ]*' | sed -e 's/\^//' <<< "$*")
+export cc=$(grep -o '[^ ]*\%[^ ]*' | sed -e 's/\%//' | sed 's/@.*//' <<< "$*")
 export bench=$(grep -Eowi 'epcc|hpcg|minife' <<< "$*")
 
 if [ -z "$libc" ] || [ -z "$cc" ] | [ -z "$bench" ]
@@ -51,7 +53,7 @@ fi
 
 if [ "$cc" == "gcc" ]
  then
-  export ccver=$(grep -Eow '6.4.0|7.1.0' <<< "$*")
+  export ccver=$(grep -o '[^ ]*\@[^ ]*' | sed 's/^[^@]*@//g' <<< "$*")
    if [ -z "$ccver" ]
     then
      echo "gcc version not specified or malformed, please input gcc version [6.4.0]"
