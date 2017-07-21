@@ -11,7 +11,7 @@ else
   rm -r EPCC-OpenMP-$cc-$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep openmp)
   tar -xf $benchfile
-  benchfolder=$(echo $benchfile | sed -e "s/$.tar.gz//")
+  benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
   mv $benchfolder EPCC-OpenMP-$cc-$ccver-$libc
   cd EPCC-OpenMP-$cc-$ccver-$libc
 fi
