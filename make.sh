@@ -85,7 +85,7 @@ fi
 
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
-echo "$bench source located at $benchpath"
+echo "$bench $benchsrctype located at $benchpath"
 rdy () {
 read ready
 if [ "$ready" == "y" ] || [ -z "$ready" ]
