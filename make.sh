@@ -71,7 +71,7 @@ elif [[ "$bench" == "epcc" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$EPCCPATH
 elif [[ "$bench" == "minife" ]]; then
-  benchsrctype=MiniFE
+  benchsrctype=.tar
   BENCHPATHVAR=$MINIFEPATH
 fi
 
@@ -118,9 +118,10 @@ else
 fi
 
 if [[ "$bench" == "minife" ]]; then
-  echo "MiniFE not supported at this time."
+  echo "MiniFE configuration started"
+  ./make-minife.sh
 elif [[ "$bench" == "hpcg" ]]; then
-  echo "HPCG configuration started"
+  echo "HPCG "
   ./make-hpcg.sh
 elif [[ "$bench" == "epcc" ]]; then
   echo "EPCC OpenMP microbenchmark configuration started"
