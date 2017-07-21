@@ -1,19 +1,19 @@
 #!/bin/bash
 cd $benchpath
 
-if [[ ! -d EPCC-OpenMP-$cc-$ccver-$libc ]]; then
+if [[ ! -d build-EPCC-OpenMP-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar.gz | grep openmp)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder EPCC-OpenMP-$cc-$ccver-$libc
-  cd EPCC-OpenMP-$cc-$ccver-$libc
+  mv $benchfolder build-EPCC-OpenMP-$cc$ccver-$libc
+  cd build-EPCC-OpenMP-$cc$ccver-$libc
 else
-  rm -r EPCC-OpenMP-$cc-$ccver-$libc
+  rm -r build-EPCC-OpenMP-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep openmp)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder EPCC-OpenMP-$cc-$ccver-$libc
-  cd EPCC-OpenMP-$cc-$ccver-$libc
+  mv $benchfolder build-EPCC-OpenMP-$cc$ccver-$libc
+  cd build-EPCC-OpenMP-$cc$ccver-$libc
 fi
 
 if [ -e "Makefile.defs" ]
