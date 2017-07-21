@@ -4,7 +4,7 @@ cd $benchpath
 if [[ ! -d build-miniFE-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar | grep -i minife)
   mkdir build-miniFE-$cc$ccver-$libc
-  tar -xf $benchfile  -C build-miniFE-$cc$ccver-$libc
+  tar -xf $benchfile -C build-miniFE-$cc$ccver-$libc
   cd build-miniFE-$cc$ccver-$libc/source
 else
   rm -r build-miniFE-$cc$ccver-$libc
