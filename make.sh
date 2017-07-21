@@ -87,7 +87,7 @@ export TOOLCHAIN=x86_64-unknown-linux-$libc
 export TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
 
 if [[ "$libc" == "musl" ]]; then
-  export LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
+  export LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/ | grep ld)
 else
   export LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
 fi
