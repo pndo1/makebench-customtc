@@ -24,11 +24,6 @@ if [ -e "Makefile.defs" ]
    touch Makefile.defs
  fi
 
-if [[ "$libc" == "musl" ]]; then
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
-else
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
-fi
 echo $LD64SO
 echo "OMPFLAG = -fopenmp -DOMPVER2 -DOMPVER3" >> Makefile.defs
 echo "TOOLCHAIN=$TOOLCHAIN" >> Makefile.defs

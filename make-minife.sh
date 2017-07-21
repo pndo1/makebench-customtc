@@ -24,11 +24,6 @@ if [ -e "Makefile-$cc$ccver-$libc" ]
    touch Makefile-$cc$ccver-$libc
  fi
 
-if [[ "$libc" == "musl" ]]; then
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
-else
-  LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
-fi
 echo $LD64SO
 echo -e 'MINIFE_TYPES =  \' >> Makefile-$cc$ccver-$libc
 echo -e '        -DMINIFE_SCALAR=double   \' >> Makefile-$cc$ccver-$libc
