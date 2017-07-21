@@ -83,6 +83,15 @@ elif [[ ! -z "$benchpathread" ]]; then
   export benchpath=$benchpathread
 fi
 
+export TOOLCHAIN=x86_64-unknown-linux-$libc
+export TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
+
+if [[ "$libc" == "musl" ]]; then
+  export LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
+else
+  export LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
+fi
+
 echo "Are these specifications okay? [y]"
 echo "Compiling $bench with $libc and $cc (version $ccver)"
 echo "$bench $benchsrctype located at $benchpath"
@@ -95,6 +104,8 @@ if [ "$ready" == "y" ] || [ -z "$ready" ]
 elif [ "$ready" == "n" ]
  then
   echo "Compilation cancelled."
+  echo "$LD64SO"
+  echo "$TOOLCHAIN"
   exit
 else
   echo "Malformed input. Please use y/n."
@@ -108,22 +119,5 @@ if [ $status != 1 ] #check that explicit directive to compile has been given
   exit
 fi
 
-export TOOLCHAIN=x86_64-unknown-linux-$libc
-export TOOLDIR=/soft/compilers/experimental/x-tools/$cc/$ccver/$TOOLCHAIN
-
-if [[ "$libc" == "musl" ]]; then
-  export LD64SO=$TOOLDIR/$TOOLCHAIN/sysroot/lib64/$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/ | grep ld)
-else
-  export LD64SO=$(ls $TOOLDIR/$TOOLCHAIN/sysroot/lib64/*.so | grep ld)
-fi
-
-if [[ "$bench" == "minife" ]]; then
-  echo "MiniFE configuration started"
-  ./make-minife.sh
-elif [[ "$bench" == "hpcg" ]]; then
-  echo "HPCG "
-  ./make-hpcg.sh
-elif [[ "$bench" == "epcc" ]]; then
-  echo "EPCC OpenMP microbenchmark configuration started"
-  ./make-epcc.sh
-fi
+echo "$bench configuration started"
+./make-$bench.sh
