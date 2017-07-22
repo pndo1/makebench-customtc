@@ -23,8 +23,8 @@ echo -e 'HPCG_DEFS     = $(HPCG_OPTS) $(HPCG_INCLUDES)' >> Make.$cc$ccver-$libc
 echo "TOOLCHAIN=$TOOLCHAIN" >> Make.$cc$ccver-$libc
 echo "TOOLDIR=$TOOLDIR" >> Make.$cc$ccver-$libc
 echo "LD64SO=$LD64SO" >> Make.$cc$ccver-$libc
-echo "CC=$TOOLDIR/bin/$TOOLCHAIN-$cc" >> Make.$cc$ccver-$libc
-echo "CXX=$MPICHPATH/mpich-$cc$ccver-$libc/bin/mpicxx" >> Make.$cc$ccver-$libc
+echo "CC=$MPICHPATH/mpich-$cc$ccver-$libc/bin/mpicc" >> Make.$cc$ccver-$libc
+echo "CXX=$MPICHPATH/mpich-$cc$ccver-$libc/bin/mpic++" >> Make.$cc$ccver-$libc
 #echo "LINKER=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Make.$cc$ccver-$libc
 echo 'CXXFLAGS =  $(HPCG_DEFS) -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm '-L$toollibs/ -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib >> Make.$cc$ccver-$libc
 #echo 'LINKFLAGS = $(HPCG_INCLUDES) -lm -lgomp' --dynamic-linker=$LD64SO >> Make.$cc$ccver-$libc
