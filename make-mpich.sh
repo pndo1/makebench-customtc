@@ -26,5 +26,9 @@ export CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp
 export CXX=$TOOLDIR/bin/$TOOLCHAIN-g++
 export LIBS=
 ../configure LDFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64" CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp CXX=$TOOLDIR/bin/$TOOLCHAIN-g++ LD=$TOOLDIR/bin/$TOOLCHAIN-ld CC=$TOOLDIR/bin/$TOOLCHAIN-$cc CFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/"   --prefix=$benchpath/mpich-$cc$ccver-$libc --exec-prefix=$benchpath/mpich-$cc$ccver-$libc --enable-shared --with-pm=hydra --with-pmi=yes --enable-romio --disable-fortran
+echo "mpich has been configured!"
+echo "Begin compilation"
 make VERBOSE=1
+echo "Compilation finished. Begin install!"
 make install
+echo "Finished with Mpich"

@@ -47,4 +47,7 @@ elif [[ -d "build-$cc$ccver-$libc" ]]; then
 fi
 ../configure $cc$ccver-$libc
 make
+echo "Finished with HPCG"
+echo "Path to spec:"
+echo "$benchpath/build-$cc$ccver-$libc"
 status=2

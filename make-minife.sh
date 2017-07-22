@@ -47,4 +47,7 @@ echo "include make_targets" >> Makefile-$cc$ccver-$libc
 echo "Makefile-$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
 make -f Makefile-$cc$ccver-$libc
+echo "Finished with miniFE!"
+echo "Path to spec:"
+echo "$benchpath/build-miniFE-$cc$ccver-$libc/src/"
 status=2

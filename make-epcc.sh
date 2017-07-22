@@ -39,4 +39,7 @@ echo 'LIBS =' >> Makefile.defs
 echo "Makefile.defs has been configured"
 echo "Begin compilation!"
 make
+echo "Finished with EPCC"
+echo "Path to spec:"
+echo "$benchpath/build-EPCC-OpenMP-$cc$ccver-$libc"
 status=2
