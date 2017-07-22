@@ -12,7 +12,7 @@ if [[ ! -d build-mpich-$cc$ccver-$libc ]]; then
 else
   rm -r build-mpich-$cc$ccver-$libc
   mkdir build-mpich-$cc$ccver-$libc
-  cd build-mpich-$cc$ccver-$libc/src
+  cd build-mpich-$cc$ccver-$libc
 fi
 
 
@@ -20,7 +20,7 @@ fi
 export CC=$TOOLDIR/bin/$TOOLCHAIN-$cc
 export CFLAGS=-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/
 export CXXFLAGS=-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/
-export LDFLAGS=-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64
+export LDFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64"
 export LD=$TOOLDIR/bin/$TOOLCHAIN-ld
 export CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp
 export CXX=$TOOLDIR/bin/$TOOLCHAIN-g++
