@@ -40,7 +40,7 @@ fi
 
 export libc=$(grep -Eowi 'musl|glibc|uclibc|gnu' <<< "$*")
 export cc=$(grep -Eowi 'gcc|clang' <<< "$*")
-export bench=$(grep -Eowi 'epcc|hpcg|minife' <<< "$*")
+export bench=$(grep -Eowi 'epcc|hpcg|minife|mpich' <<< "$*")
 
 if [ -z "$libc" ] || [ -z "$cc" ] | [ -z "$bench" ]
  then
@@ -66,13 +66,15 @@ fi
 if [[ "$bench" == "hpcg" ]]; then
   benchsrctype=source
   BENCHPATHVAR=$HPCGPATH
-
 elif [[ "$bench" == "epcc" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$EPCCPATH
 elif [[ "$bench" == "minife" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$MINIFEPATH
+elif [[ "$bench" == "mpich" ]]; then
+  benchsrctype=source
+  BENCHPATHVAR=$MPICHPATH
 fi
 
 echo "Please input folder of $benchsrctype of $bench or use variable [$BENCHPATHVAR]:"
