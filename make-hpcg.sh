@@ -14,8 +14,8 @@ echo $LD64SO
 echo -e 'SHELL        = /bin/sh\nCD           = cd\n\nCP           = cp\nLN_S         = ln -s -f\nMKDIR        = mkdir -p\nRM           = /bin/rm -f\nTOUCH        = touch' >> Make.$cc$ccver-$libc
 echo -e 'TOPdir       = .\nSRCdir       = $(TOPdir)/src\nINCdir       = $(TOPdir)/src\nBINdir       = $(TOPdir)/bin' >> Make.$cc$ccver-$libc
 echo -e "MPdir        = $MPICHPATH/mpich-$cc$ccver-$libc" >> Make.$cc$ccver-$libc
-echo -e "MPinc        = $MPICHPATH/mpich-$cc$ccver-$libc/include" >> Make.$cc$ccver-$libc
-echo -e "MPlib        = $MPICHPATH/mpich-$cc$ccver-$libc/lib" >> Make.$cc$ccver-$libc
+echo -e 'MPinc        = $(MPdir)/include' >> Make.$cc$ccver-$libc
+echo -e 'MPlib        = $(Mpdir)/lib' >> Make.$cc$ccver-$libc
 echo -e 'HPCG_INCLUDES = -I$(INCdir) -I$(INCdir)/$(arch) $(MPinc)\nHPCG_LIBS     =' >> Make.$cc$ccver-$libc
 echo -e 'HPCG_OPTS     = ' >> Make.$cc$ccver-$libc
 echo -e 'HPCG_DEFS     = $(HPCG_OPTS) $(HPCG_INCLUDES)' >> Make.$cc$ccver-$libc
