@@ -32,3 +32,5 @@ make VERBOSE=1
 echo "Compilation finished. Begin install!"
 make install
 echo "Finished with Mpich"
+echo "Install location"
+echo "$benchpath/mpich-$cc$ccver-$libc"

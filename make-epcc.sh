@@ -1,19 +1,19 @@
 #!/bin/bash
 cd $benchpath
 
-if [[ ! -d build-EPCC-OpenMP-$cc$ccver-$libc ]]; then
+if [[ ! -d EPCC-OpenMP-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar.gz | grep openmp)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder build-EPCC-OpenMP-$cc$ccver-$libc
-  cd build-EPCC-OpenMP-$cc$ccver-$libc
+  mv $benchfolder EPCC-OpenMP-$cc$ccver-$libc
+  cd EPCC-OpenMP-$cc$ccver-$libc
 else
-  rm -r build-EPCC-OpenMP-$cc$ccver-$libc
+  rm -r EPCC-OpenMP-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep openmp)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder build-EPCC-OpenMP-$cc$ccver-$libc
-  cd build-EPCC-OpenMP-$cc$ccver-$libc
+  mv $benchfolder EPCC-OpenMP-$cc$ccver-$libc
+  cd EPCC-OpenMP-$cc$ccver-$libc
 fi
 
 if [ -e "Makefile.defs" ]
@@ -41,5 +41,5 @@ echo "Begin compilation!"
 make
 echo "Finished with EPCC"
 echo "Path to spec:"
-echo "$benchpath/build-EPCC-OpenMP-$cc$ccver-$libc"
+echo "$benchpath/EPCC-OpenMP-$cc$ccver-$libc"
 status=2

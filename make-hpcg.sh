@@ -36,20 +36,20 @@ echo -e "ARCHIVER     = ar\nARFLAGS      = r\nRANLIB       = echo" >> Make.$cc$c
 echo "Make.$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
 cd ..
-if [[ ! -d "build-$cc$ccver-$libc" ]]; then
-  mkdir build-$cc$ccver-$libc
-  cd build-$cc$ccver-$libc
-elif [[ -d "build-$cc$ccver-$libc" ]]; then
-  cd build-$cc$ccver-$libc
+if [[ ! -d "$cc$ccver-$libc" ]]; then
+  mkdir $cc$ccver-$libc
+  cd $cc$ccver-$libc
+elif [[ -d "$cc$ccver-$libc" ]]; then
+  cd $cc$ccver-$libc
   make clean
   cd ..
-  rm -r build-$cc$ccver-$libc
-  mkdir build-$cc$ccver-$libc
-  cd build-$cc$ccver-$libc
+  rm -r $cc$ccver-$libc
+  mkdir $cc$ccver-$libc
+  cd $cc$ccver-$libc
 fi
 ../configure $cc$ccver-$libc
 make
 echo "Finished with HPCG"
 echo "Path to spec:"
-echo "$benchpath/build-$cc$ccver-$libc"
+echo "$benchpath/$cc$ccver-$libc"
 status=2

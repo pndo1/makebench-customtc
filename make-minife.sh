@@ -1,19 +1,19 @@
 #!/bin/bash
 cd $benchpath
 
-if [[ ! -d build-miniFE-$cc$ccver-$libc ]]; then
+if [[ ! -d miniFE-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder build-miniFE-$cc$ccver-$libc
-  cd build-miniFE-$cc$ccver-$libc/src
+  mv $benchfolder miniFE-$cc$ccver-$libc
+  cd miniFE-$cc$ccver-$libc/src
 else
-  rm -r build-miniFE-$cc$ccver-$libc
+  rm -r miniFE-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep -i minife)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder build-miniFE-$cc$ccver-$libc
-  cd build-miniFE-$cc$ccver-$libc/src
+  mv $benchfolder miniFE-$cc$ccver-$libc
+  cd miniFE-$cc$ccver-$libc/src
 fi
 
 if [ -e "Makefile-$cc$ccver-$libc" ]
@@ -49,5 +49,5 @@ echo "Begin compilation!"
 make -f Makefile-$cc$ccver-$libc
 echo "Finished with miniFE!"
 echo "Path to spec:"
-echo "$benchpath/build-miniFE-$cc$ccver-$libc/src/"
+echo "$benchpath/miniFE-$cc$ccver-$libc/src/"
 status=2
