@@ -25,10 +25,10 @@ cd ../ks_imp_rhmc
 awk "NR==36 {$0="OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib"} 1" Makefile
 awk "NR==28 {$0="  CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc"} 1" Makefile
 awk "NR==30 {$0="  CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc"} 1" Makefile
-sed -i "88iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/"
-sed -i "89iIMPI        = -I$(MPdir)/include"
-sed -i "90iMPlib        = $(Mpdir)/lib/libmpi.a"
-sed -i "92iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich"
+sed -i "88iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
+sed -i "89iIMPI        = -I$(MPdir)/include" Makefile
+sed -i "90iMPlib        = $(Mpdir)/lib/libmpi.a" Makefile
+sed -i "92iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich" Makefile
 
 # echo $LD64SO
 # echo 'CFLAGS = -O3 -fopenmp -lm '-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ >> Makefile-$cc$ccver-$libc
