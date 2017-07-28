@@ -26,7 +26,7 @@ export CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp
 export CXX=$TOOLDIR/bin/$TOOLCHAIN-g++
 export FC=$TOOLDIR/bin/$TOOLCHAIN-gfortran
 export LIBS=
-../configure --host=$TOOLCHAIN FC=$TOOLDIR/bin/$TOOLCHAIN-gfortran LDFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64" CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp CXX=$TOOLDIR/bin/$TOOLCHAIN-g++ LD=$TOOLDIR/bin/$TOOLCHAIN-ld CC=$TOOLDIR/bin/$TOOLCHAIN-$cc CFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/"   --prefix=$benchpath/mpich-$cc$ccver-$libc --exec-prefix=$benchpath/mpich-$cc$ccver-$libc --enable-shared --with-pm=hydra --with-pmi=yes --enable-romio
+../configure --host=$TOOLCHAIN F77=$TOOLDIR/bin/$TOOLCHAIN-gfortran FC=$TOOLDIR/bin/$TOOLCHAIN-gfortran LDFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64" CPP=$TOOLDIR/bin/$TOOLCHAIN-cpp CXX=$TOOLDIR/bin/$TOOLCHAIN-g++ LD=$TOOLDIR/bin/$TOOLCHAIN-ld CC=$TOOLDIR/bin/$TOOLCHAIN-$cc CFLAGS="-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/"   --prefix=$benchpath/mpich-$cc$ccver-$libc --exec-prefix=$benchpath/mpich-$cc$ccver-$libc --enable-shared --with-pm=hydra --with-pmi=yes --enable-romio
 echo "Begin compilation"
 make VERBOSE=1
 echo "Compilation finished. Begin install!"
