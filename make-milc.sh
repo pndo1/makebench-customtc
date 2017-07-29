@@ -28,7 +28,7 @@ sed -i "124iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
 sed -i '125iIMPI        = -I$(MPdir)/include' Makefile
 sed -i '126iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
 sed -i '128iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich' Makefile
-sed -i 's|qopenmp|fopenmp|'
+sed -i 's|qopenmp|fopenmp|' Makefile
 
 echo "milc-$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
