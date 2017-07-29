@@ -17,7 +17,7 @@ else
 fi
 
 cd libraries
-sed -i "29s|.*|CC = Make_vanilla $TOOLDIR/bin/$TOOLCHAIN-$cc|" Make_vanilla
+sed -i "30s|.*|CC = $TOOLDIR/bin/$TOOLCHAIN-$cc|" Make_vanilla
 sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
 sed -i "36s|.*|OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64|" Make_vanilla
 cd ../ks_imp_rhmc
