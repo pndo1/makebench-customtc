@@ -25,9 +25,9 @@ sed -i "36s|.*|OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linke
 sed -i "28s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "30s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "88iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
-sed -i "89iIMPI        = -I$(MPdir)/include" Makefile
-sed -i "90iMPlib        = $(Mpdir)/lib/libmpi.a" Makefile
-sed -i "92iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich" Makefile
+sed -i '89iIMPI        = -I$(MPdir)/include' Makefile
+sed -i '90iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
+sed -i '92iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich' Makefile
 
 # echo $LD64SO
 # echo 'CFLAGS = -O3 -fopenmp -lm '-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/ >> Makefile-$cc$ccver-$libc
