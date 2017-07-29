@@ -36,5 +36,5 @@ cd ..
 ./build.sh
 echo "Finished with milc!"
 echo "Path to spec:"
-echo "$benchpath/milc-$cc$ccver-$libc/src/"
+echo "$benchpath/milc-$cc$ccver-$libc/"
 status=2
