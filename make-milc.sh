@@ -19,15 +19,16 @@ echo $LD64SO
 cd libraries
 sed -i "30s|.*|CC = $TOOLDIR/bin/$TOOLCHAIN-$cc|" Make_vanilla
 sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
-sed -i "36s|.*|OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64|" Make_vanilla
+sed -i "36s|.*|OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/|" Make_vanilla
 cd ../ks_imp_rhmc
-sed -i "48s|.*|OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib|" Makefile
+sed -i "48s|.*|OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib|" Makefile
 sed -i "38s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "40s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "124iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
 sed -i '125iIMPI        = -I$(MPdir)/include' Makefile
 sed -i '126iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
 sed -i '128iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich' Makefile
+sed -i 's|qopenmp|fopenmp|'
 
 echo "milc-$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
