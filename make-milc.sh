@@ -17,10 +17,10 @@ else
 fi
 
 cd libraries
-sed -i 's/CC               = cc  # ( cc89 gcc xlc gcc pgcc cl g++ )/CC               = $TOOLDIR/bin/$TOOLCHAIN-$cc/g' Make_vanilla
-sed -i 's/CC               = cc  # ( cc89 gcc xlc gcc pgcc cl g++ )/CC               = $TOOLDIR/bin/$TOOLCHAIN-$cc/g' Make_vanilla
-sed -i '39iLD_LIBRARY_PATH=''' Make_vanilla
-sed -i 's/OPT              = -O3 -xAVX -ip -opt-prefetch/OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=/soft/compilers/experimental/x-tools/gcc/7.1.0/x86_64-unknown-linux-gnu/x86_64-unknown-linux-gnu/sysroot/lib64/ld-2.25.so,-rpath,/soft/compilers/experimental/x-tools/gcc/7.1.0/x86_64-unknown-linux-gnu/x86_64-unknown-linux-gnu/sysroot/lib64,/g' Make_vanilla
+sed -i 's/"CC               = cc  # ( cc89 gcc xlc gcc pgcc cl g++ )"/"CC               = $TOOLDIR/bin/$TOOLCHAIN-$cc"/g' Make_vanilla
+sed -i 's/"CC               = cc  # ( cc89 gcc xlc gcc pgcc cl g++ )"/"CC               = $TOOLDIR/bin/$TOOLCHAIN-$cc"/g' Make_vanilla
+sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
+sed -i 's/"OPT              = -O3 -xAVX -ip -opt-prefetch"/"OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=/soft/compilers/experimental/x-tools/gcc/7.1.0/x86_64-unknown-linux-gnu/x86_64-unknown-linux-gnu/sysroot/lib64/ld-2.25.so,-rpath,/soft/compilers/experimental/x-tools/gcc/7.1.0/x86_64-unknown-linux-gnu/x86_64-unknown-linux-gnu/sysroot/lib64"/g' Make_vanilla
 cd ../ks_imp_rhmc
 awk "NR==36 {$0="OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib"} 1" Makefile
 awk "NR==28 {$0="  CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc"} 1" Makefile
