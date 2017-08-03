@@ -26,7 +26,7 @@ echo "LD64SO=$LD64SO" >> Make.$cc$ccver-$libc-static
 echo "CC=$MPICHPATH/mpich-$cc$ccver-$libc/bin/mpicc" >> Make.$cc$ccver-$libc-static
 echo "CXX=$MPICHPATH/mpich-$cc$ccver-$libc/bin/mpic++" >> Make.$cc$ccver-$libc-static
 #echo "LINKER=$TOOLDIR/bin/$TOOLCHAIN-ld" >> Make.$cc$ccver-$libc-static
-echo 'CXXFLAGS =  $(HPCG_DEFS) -static -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm '-Wl,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib >> Make.$cc$ccver-$libc-static
+echo 'CXXFLAGS = -static $(HPCG_DEFS)  -O3 -ffast-math -ftree-vectorize -ftree-vectorizer-verbose=0 -fopenmp -lm '-Wl,-Bstatic,--dynamic-linker=$LD64SO,-rpath,"$TOOLDIR"/"$TOOLCHAIN"/sysroot/lib64,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib >> Make.$cc$ccver-$libc-static
 #echo 'LINKFLAGS = $(HPCG_INCLUDES) -lm -lgomp' --dynamic-linker=$LD64SO >> Make.$cc$ccver-$libc-static
 echo -e 'LINKER       = $(CXX)\nLINKFLAGS    = $(CXXFLAGS)' >> Make.$cc$ccver-$libc-static
 echo "CPP = $TOOLDIR/bin/$TOOLCHAIN-cpp" >> Make.$cc$ccver-$libc-static
