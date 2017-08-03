@@ -69,7 +69,7 @@ if [ "$cc" == "gcc" ]
   exit
 fi
 
-if [[ "$bench" == "hpcg" ]]; then
+if [[ "$bench" == "hpcg" ]] || [[ "$bench" == "hpcg-static" ]]; then
   benchsrctype=source
   BENCHPATHVAR=$HPCGPATH
 elif [[ "$bench" == "epcc" ]]; then
