@@ -41,6 +41,12 @@ fi
 export libc=$(grep -Eowi 'musl|glibc|uclibc|gnu' <<< "$*")
 export cc=$(grep -Eowi 'gcc|clang' <<< "$*")
 export bench=$(grep -Eowi 'epcc|hpcg|minife|mpich|milc' <<< "$*")
+export static=$(grep -Eowi 'static' <<< "$*")
+
+if [ "$static" == "static" ] || [ "$bench" == "hpcg" ]
+ then
+  bench=hpcg-static
+fi
 
 if [ -z "$libc" ] || [ -z "$cc" ] | [ -z "$bench" ]
  then
