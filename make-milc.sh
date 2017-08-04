@@ -18,7 +18,7 @@ fi
 echo $LD64SO
 cd libraries
 sed -i "30s|.*|CC = $TOOLDIR/bin/$TOOLCHAIN-$cc|" Make_vanilla
-sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
+sed -i "39iLD_LIBRARY_PATH="$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/ $TOOLDIR/$TOOLCHAIN/sysroot/lib64/"" Make_vanilla
 sed -i "36s|.*|OPT              = -static -O3 -opt-prefetch|" Make_vanilla
 #--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/|
 cd ../ks_imp_rhmc
