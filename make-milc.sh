@@ -30,7 +30,7 @@ sed -i "40s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc
 sed -i "124iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
 sed -i '125iIMPI        = -I$(MPdir)/include' Makefile
 sed -i '126iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
-sed -i '128iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich' Makefile
+sed -i '128iLMPI = -Wl,-Bstatic,-L/$(MPdir)/lib/shared -Wl,-Bstatic,-L/$(MPdir)/lib -Wl,-Bstatic,-lmpich' Makefile
 sed -i 's|qopenmp|fopenmp|' Makefile
 
 echo "milc-$cc$ccver-$libc has been configured"
