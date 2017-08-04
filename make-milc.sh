@@ -22,8 +22,9 @@ sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
 sed -i "36s|.*|OPT              = -static -O3 -opt-prefetch|" Make_vanilla
 #--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/|
 cd ../ks_imp_rhmc
-sed -i "48s|.*|OPT              = -static -g -O3 -lm -lgomp -fopenmp -Wl,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib|" Makefile
-#-Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib
+sed -i "48s|.*|OPT              = -static -g -O3 -Wl,-Bstatic,-lm -Wl,-Bstatic,-lgomp -fopenmp|" Makefile
+#-Wl,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib
+sed -i "49iOCFLAGS = -tpp2 -static" Makefile
 sed -i "38s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "40s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "124iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
