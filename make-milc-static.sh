@@ -5,7 +5,7 @@ if [[ ! -d milc-$cc$ccver-$libc ]]; then
   benchfile=$(ls $benchpath/*.tar.gz | grep -i milc)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder milc-$cc$ccver-$libc
+  mv $benchfolder milc-$cc$ccver-$libc-static
   cd milc-$cc$ccver-$libc-static
 else
   rm -r milc-$cc$ccver-$libc
