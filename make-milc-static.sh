@@ -33,6 +33,7 @@ sed -i '126iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
 sed -i 's|CFLAGS = ${OPT}|CFLAGS = -static ${OPT}|g' Makefile
 sed -i '128iLMPI = -Wl,-Bstatic,-L/$(MPdir)/lib/shared -Wl,-Bstatic,-L/$(MPdir)/lib' Makefile
 sed -i 's|qopenmp|fopenmp|' Makefile
+sed -i 's|LDFLAGS = -fopenmp|LDFLAGS = -static -fopenmp|g' Makefile
 
 echo "milc-$cc$ccver-$libc has been configured"
 echo "Begin compilation!"
