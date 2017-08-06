@@ -6,14 +6,14 @@ if [[ ! -d milc-$cc$ccver-$libc ]]; then
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
   mv $benchfolder milc-$cc$ccver-$libc
-  cd milc-$cc$ccver-$libc
+  cd milc-$cc$ccver-$libc-static
 else
   rm -r milc-$cc$ccver-$libc
   benchfile=$(ls $benchpath/*.tar.gz | grep -i milc)
   tar -xf $benchfile
   benchfolder=$(echo $benchfile | sed -e 's/.tar.gz$//')
-  mv $benchfolder milc-$cc$ccver-$libc
-  cd milc-$cc$ccver-$libc
+  mv $benchfolder milc-$cc$ccver-$libc-static
+  cd milc-$cc$ccver-$libc-static
 fi
 echo $LD64SO
 cd libraries
@@ -35,11 +35,11 @@ sed -i '128iLMPI = -Wl,-Bstatic,-L/$(MPdir)/lib/shared -Wl,-Bstatic,-L/$(MPdir)/
 sed -i 's|qopenmp|fopenmp|' Makefile
 sed -i 's|LDFLAGS = -fopenmp|LDFLAGS = -static -fopenmp|g' Makefile
 
-echo "milc-$cc$ccver-$libc has been configured"
+echo "milc-$cc$ccver-$libc-static has been configured"
 echo "Begin compilation!"
 cd ..
 ./build.sh
 echo "Finished with milc!"
 echo "Path to spec:"
-echo "$benchpath/milc-$cc$ccver-$libc/"
+echo "$benchpath/milc-$cc$ccver-$libc-static/"
 status=2
