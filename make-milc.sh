@@ -18,19 +18,16 @@ fi
 echo $LD64SO
 cd libraries
 sed -i "30s|.*|CC = $TOOLDIR/bin/$TOOLCHAIN-$cc|" Make_vanilla
-sed -i "39iLD_LIBRARY_PATH="$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/ $TOOLDIR/$TOOLCHAIN/sysroot/lib64/"" Make_vanilla
-sed -i "36s|.*|OPT              = -static -O3 -opt-prefetch|" Make_vanilla
-#--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/|
+sed -i '39iLD_LIBRARY_PATH=""' Make_vanilla
+sed -i "36s|.*|OPT              = -O3 -opt-prefetch -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/|" Make_vanilla
 cd ../ks_imp_rhmc
-sed -i "48s|.*|OPT              = -static -g -O3 -Wl,-Bstatic,-lm -Wl,-Bstatic,-lgomp -fopenmp -Wl,-L$TOOLDIR/$TOOLCHAIN/sysroot/lib64/,-L$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib|" Makefile
-#-Wl,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib
-sed -i "49iOCFLAGS = -tpp2 -static" Makefile
+sed -i "48s|.*|OPT              = -g -O3 -lm -lgomp -fopenmp -Wl,--dynamic-linker=$LD64SO,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/lib64,-rpath,$TOOLDIR/$TOOLCHAIN/sysroot/usr/lib/,-rpath,$MPICHPATH/mpich-$cc$ccver-$libc/lib,-L$toollibs/,-L$MPICHPATH/mpich-$cc$ccver-$libc/lib|" Makefile
 sed -i "38s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "40s|.*|CC = /soft/compilers/experimental/mpich-3.2/mpich-$cc$ccver-$libc/bin/mpicc|" Makefile
 sed -i "124iMPdir        = $MPICHPATH/mpich-$cc$ccver-$libc/" Makefile
 sed -i '125iIMPI        = -I$(MPdir)/include' Makefile
 sed -i '126iMPlib        = $(Mpdir)/lib/libmpi.a' Makefile
-sed -i '128iLMPI = -Wl,-Bstatic,-L/$(MPdir)/lib/shared -Wl,-Bstatic,-L/$(MPdir)/lib' Makefile
+sed -i '128iLMPI = -L/$(MPdir)/lib/shared -L/$(MPdir)/lib -lmpich' Makefile
 sed -i 's|qopenmp|fopenmp|' Makefile
 
 echo "milc-$cc$ccver-$libc has been configured"
