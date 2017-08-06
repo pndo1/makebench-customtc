@@ -82,7 +82,7 @@ elif [[ "$bench" == "minife" ]]; then
 elif [[ "$bench" == "mpich" ]]; then
   benchsrctype=source
   BENCHPATHVAR=$MPICHPATH
-elif [[ "$bench" == "milc" ]]; then
+elif [[ "$bench" == "milc" ]]|| [[ "$bench" == "milc-static" ]]; then
   benchsrctype=tar.gz
   BENCHPATHVAR=$MILCPATH
 fi
